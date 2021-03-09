@@ -37,7 +37,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         try (Statement statement = Util.connectDB().createStatement()) {
-            statement.executeUpdate(String.format("INSERT INTO user (name, lastName, age) " +
+            statement.executeUpdate(String.format("INSERT INTO User (name, lastName, age) " +
                     "VALUES(%s, %s, %d)", name, lastName, age));
             System.out.printf("User named %s added successfully\n", name);
         } catch (SQLException e) {
@@ -48,7 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void removeUserById(long id) {
         try (Statement statement = Util.connectDB().createStatement()) {
-            statement.executeUpdate(String.format("DELETE FROM user WHERE id = %d", id));
+            statement.executeUpdate(String.format("DELETE FROM User WHERE id = %d", id));
         } catch (SQLException e) {
             System.out.println("Удаление юзера экзепшн");
         }
@@ -57,7 +57,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> list = new ArrayList<>();
         try (Statement statement = Util.connectDB().createStatement()) {
-            ResultSet rs = statement.executeQuery("SELECT * FROM usersdb.user");
+            ResultSet rs = statement.executeQuery("SELECT * FROM usersdb.User");
             while (rs.next()) {
                 // какой ещё есть способ?
                 String name = rs.getString("name");
