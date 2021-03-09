@@ -22,7 +22,8 @@ public class Util {
     private static SessionFactory sessionFactory;
 
 
-    public static Connection connectDB() throws SQLException {
+    public static Connection connectDB() throws SQLException, ClassNotFoundException {
+       // Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
         return connection;
     }
@@ -31,10 +32,12 @@ public class Util {
         if(sessionFactory == null) {
             try {
                 Properties properties = new Properties();
+                properties.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
                 properties.setProperty("hibernate.connection.url", URL);
                 properties.setProperty("hibernate.connection.username", USER);
                 properties.setProperty("hibernate.connection.password", PASSWORD);
                 properties.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+
 
                 //properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
