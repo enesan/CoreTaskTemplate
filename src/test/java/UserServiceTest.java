@@ -13,7 +13,6 @@ public class UserServiceTest {
     private final String testLastName = "'Ivanov'";
     private final byte testAge = 5;
 
-
     @Test
     public void dropUsersTable() {
         try {
@@ -42,7 +41,7 @@ public class UserServiceTest {
             userService.saveUser(testName, testLastName, testAge);
 
             User user = userService.getAllUsers().get(0);
-
+            System.out.println(user.toString());
             if (!testName.equals(user.getName())
                     || !testLastName.equals(user.getLastName())
                     || testAge != user.getAge()
@@ -74,6 +73,10 @@ public class UserServiceTest {
             userService.createUsersTable();
             userService.saveUser(testName, testLastName, testAge);
             List<User> userList = userService.getAllUsers();
+
+            for (User user : userList) {
+                System.out.println(user.toString());
+            }
 
             if (userList.size() != 1) {
                 Assert.fail("Проверьте корректность работы метода сохранения пользователя/удаления или создания таблицы");

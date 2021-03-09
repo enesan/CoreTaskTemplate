@@ -14,21 +14,20 @@ public class Main {
 
     public static void main(String[] args) {
         UserServiceImpl us = new UserServiceImpl();
-        us.createUsersTable();
+      //  us.createUsersTable();
 
-        int count = 4;
-        us.saveUser("John", "Wisdom", (byte)35);
-        us.saveUser("Alice", "Brown", (byte)27);
-        us.saveUser("Robert", "Edison", (byte)25);
-        us.saveUser("Andy", "Hampsteen", (byte)32);
+        us.saveUser("John", "Wisdom", (byte) 35);
+      //  us.saveUser("Alice", "Brown", (byte) 27);
+      //  us.saveUser("Robert", "Edison", (byte) 25);
+      //  us.saveUser("Andy", "Hampsteen", (byte) 32);
 
-        List<User> usersList = us.getAllUsers();
+     //   List<User> usersList = us.getAllUsers();
 
-        for (User user : usersList) {
-            System.out.println(user.toString());
-        }
+     //   for (User user : usersList) {
+     //       System.out.println(user.toString());
+     //   }
 
-        us.cleanUsersTable();
-        us.dropUsersTable();
+       // us.cleanUsersTable();
+       // us.dropUsersTable();
     }
 }
