@@ -23,7 +23,7 @@ public class UserDaoHibernateImpl implements UserDao {
                     "name VARCHAR(50) NOT NULL," +
                     "lastName VARCHAR(50)," +
                     "age TINYINT(3))");
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println("Create table exception");
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void dropUsersTable() {
         try (Statement statement = Util.connectDB().createStatement()) {
             statement.executeUpdate("DROP TABLE IF EXISTS User");
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println("Drop table exception");
             e.printStackTrace();
         }

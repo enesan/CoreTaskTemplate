@@ -22,8 +22,7 @@ public class Util {
     private static SessionFactory sessionFactory;
 
 
-    public static Connection connectDB() throws SQLException, ClassNotFoundException {
-       // Class.forName("com.mysql.jdbc.Driver");
+    public static Connection connectDB() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
         return connection;
     }
