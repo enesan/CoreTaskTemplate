@@ -14,13 +14,19 @@ public class Main {
 
     public static void main(String[] args) {
         UserServiceImpl us = new UserServiceImpl();
-        us.cleanUsersTable();
+
         us.dropUsersTable();
         us.createUsersTable();
         us.saveUser("'John'", "'Wisdom'", (byte) 35);
-        us.saveUser("'Alice'", "'Brown'", (byte) 27);
-        us.saveUser("'Robert'", "'Edison'", (byte) 25);
-        us.saveUser("'Andy'", "'Hampsteen'", (byte) 32);
+        User user = us.getAllUsers().get(0);
+
+       // us.cleanUsersTable();
+        us.dropUsersTable();
+        us.createUsersTable();
+        us.saveUser("'John'", "'Wisdom'", (byte) 35);
+      //  us.saveUser("'Alice'", "'Brown'", (byte) 27);
+      //  us.saveUser("'Robert'", "'Edison'", (byte) 25);
+      //  us.saveUser("'Andy'", "'Hampsteen'", (byte) 32);
 //
         us.removeUserById(1);
 //

@@ -17,7 +17,6 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void createUsersTable() {
         try (Statement statement = Util.connectDB().createStatement()) {
-
             // нужен ли здесь автоинкремент у айди, если он прописан в аннотации?
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS User" +
                     "(id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT," +
