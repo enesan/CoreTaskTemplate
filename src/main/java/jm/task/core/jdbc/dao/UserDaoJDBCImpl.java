@@ -17,7 +17,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void createUsersTable() {
         try (Statement statement = Util.connectDB().createStatement()) {
-            statement.execute("CREATE TABLE IF NOT EXISTS users " +
+            statement.execute("CREATE TABLE IF NOT EXISTS User " +
                     "(id BIGINT primary key not null auto_increment," +
                     "name VARCHAR(50) not null," +
                     "lastName VARCHAR(50)," +
@@ -29,7 +29,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void dropUsersTable() {
         try (Statement statement = Util.connectDB().createStatement()) {
-            statement.executeUpdate("DROP TABLE IF EXISTS users");
+            statement.executeUpdate("DROP TABLE IF EXISTS User");
         } catch (SQLException e) {
             System.out.println("Дроптэйбл экзепшн");
         }

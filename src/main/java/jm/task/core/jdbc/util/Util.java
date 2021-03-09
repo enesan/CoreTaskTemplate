@@ -21,6 +21,7 @@ public class Util {
 
     private static SessionFactory sessionFactory;
 
+
     public static Connection connectDB() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
         return connection;
@@ -35,13 +36,14 @@ public class Util {
                 properties.setProperty("hibernate.connection.password", PASSWORD);
                 properties.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
 
-                properties.setProperty("hibernate.hbm2ddl.auto", "create");
+                //properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
                 Configuration configuration = new Configuration()
                         .addProperties(properties).addAnnotatedClass(User.class);
                 StandardServiceRegistryBuilder builder =
                         new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
+
             } catch (Exception e) {
                 System.out.println("Исключение в создании sessionFactory");
                // e.printStackTrace();

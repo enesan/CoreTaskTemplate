@@ -19,7 +19,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Statement statement = Util.connectDB().createStatement()) {
 
             // нужен ли здесь автоинкремент у айди, если он прописан в аннотации?
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS users" +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS User" +
                     "(id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT," +
                     "name VARCHAR(50) NOT NULL," +
                     "lastName VARCHAR(50)," +
@@ -33,7 +33,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void dropUsersTable() {
         try (Statement statement = Util.connectDB().createStatement()) {
-            statement.executeUpdate("DROP TABLE IF EXISTS users");
+            statement.executeUpdate("DROP TABLE IF EXISTS User");
         } catch (SQLException e) {
             System.out.println("Drop table exception");
             e.printStackTrace();
@@ -47,6 +47,7 @@ public class UserDaoHibernateImpl implements UserDao {
         session.save(new User(name, lastName, age));
         session.getTransaction().commit();
         session.close();
+
     }
 
     @Override
@@ -54,6 +55,7 @@ public class UserDaoHibernateImpl implements UserDao {
         Session session = Util.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         // здесь serializable может быть поле, метод, класс?(2 параметр)
+        //session.delete(String.format("FROM User WHERE id = %d", id));
         session.delete(session.get(User.class, id));
         transaction.commit();
         session.close();
@@ -68,8 +70,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void cleanUsersTable() {
         Session session = Util.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        // зачем нужен executeupdate в конце?
-        session.createSQLQuery("TRUNCATE TABLE users").executeUpdate();
+        session.createSQLQuery("TRUNCATE TABLE User");
         transaction.commit();
         session.close();
     }
