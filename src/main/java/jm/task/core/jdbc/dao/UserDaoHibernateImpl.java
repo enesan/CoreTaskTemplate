@@ -25,7 +25,7 @@ public class UserDaoHibernateImpl implements UserDao {
                 "(id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT," +
                 "name VARCHAR(50) NOT NULL," +
                 "lastName VARCHAR(50)," +
-                "age TINYINT(3))").addEntity(User.class).executeUpdate();
+                "age TINYINT(3))").executeUpdate();
         transaction.commit();
         session.close();
     }
@@ -34,7 +34,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void dropUsersTable() {
         Session session = Util.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.createSQLQuery("DROP TABLE IF EXISTS User").addEntity(User.class).executeUpdate();
+        session.createSQLQuery("DROP TABLE IF EXISTS User").executeUpdate();
         transaction.commit();
         session.close();
     }
@@ -61,7 +61,12 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return Util.getSessionFactory().openSession().createQuery("FROM User").list();
+        Session session = Util.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        List<User> list = session.createQuery("FROM User").list();
+        transaction.commit();
+        session.close();
+        return list;
     }
 
     @Override
