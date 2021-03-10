@@ -15,12 +15,11 @@ import javax.imageio.spi.ServiceRegistry;
 
 public class Util {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/usersdb?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/usersdb?useSSL=false&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
 
     private static SessionFactory sessionFactory;
-
 
     public static Connection connectDB() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -31,14 +30,11 @@ public class Util {
         if(sessionFactory == null) {
             try {
                 Properties properties = new Properties();
-                properties.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+                properties.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
                 properties.setProperty("hibernate.connection.url", URL);
                 properties.setProperty("hibernate.connection.username", USER);
                 properties.setProperty("hibernate.connection.password", PASSWORD);
                 properties.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
-
-
-                //properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
                 Configuration configuration = new Configuration()
                         .addProperties(properties).addAnnotatedClass(User.class);

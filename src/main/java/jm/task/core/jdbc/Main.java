@@ -5,10 +5,8 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.util.List;
+
 
 public class Main {
 
@@ -17,24 +15,24 @@ public class Main {
 
         us.dropUsersTable();
         us.createUsersTable();
-        us.saveUser("'John'", "'Wisdom'", (byte) 35);
-        User user = us.getAllUsers().get(0);
+      //  us.saveUser("'John'", "'Wisdom'", (byte) 35);
+      //  us.getAllUsers().get(0);
 
-       // us.cleanUsersTable();
-        us.dropUsersTable();
-        us.createUsersTable();
-        us.saveUser("'John'", "'Wisdom'", (byte) 35);
+      //  us.cleanUsersTable();
+      //  us.dropUsersTable();
+      //  us.createUsersTable();
+      //  us.saveUser("'John'", "'Wisdom'", (byte) 35);
       //  us.saveUser("'Alice'", "'Brown'", (byte) 27);
       //  us.saveUser("'Robert'", "'Edison'", (byte) 25);
       //  us.saveUser("'Andy'", "'Hampsteen'", (byte) 32);
 //
-        us.removeUserById(1);
+        us.removeUserById(3);
 //
-       // List<User> usersList = us.getAllUsers();
+        List<User> usersList = us.getAllUsers();
 //
-       // for (User user : usersList) {
-       //     System.out.println(user.toString());
-       // }
+        for (User userr : usersList) {
+            System.out.println(userr.toString());
+        }
 
 
     }
